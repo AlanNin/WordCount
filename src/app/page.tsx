@@ -1,37 +1,41 @@
-import Link from "next/link";
+"use client";
 
-export default function HomePage() {
+import { useState, useCallback } from "react";
+
+export default function WordCounter() {
+  const [text, setText] = useState("");
+  const [wordCount, setWordCount] = useState(0);
+
+  const countWords = useCallback((text: string) => {
+    const trimmedText = text.trim();
+    const words = trimmedText === "" ? [] : trimmedText.split(/\s+/);
+    return words.length;
+  }, []);
+
+  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newText = e.target.value;
+    setText(newText);
+    setWordCount(countWords(newText));
+  };
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-        <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-          Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+      <div className="max-w-2xl w-full bg-white rounded-lg shadow-md p-6">
+        <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
+          Word Counter
         </h1>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-            href="https://create.t3.gg/en/usage/first-steps"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">First Steps →</h3>
-            <div className="text-lg">
-              Just the basics - Everything you need to know to set up your
-              database and authentication.
-            </div>
-          </Link>
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-            href="https://create.t3.gg/en/introduction"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">Documentation →</h3>
-            <div className="text-lg">
-              Learn more about Create T3 App, the libraries it uses, and how to
-              deploy it.
-            </div>
-          </Link>
+        <textarea
+          className="w-full h-64 p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+          placeholder="Type or paste your text here..."
+          value={text}
+          onChange={handleTextChange}
+        ></textarea>
+        <div className="mt-4 text-center">
+          <p className="text-xl font-semibold text-gray-700">
+            Word Count: <span className="text-blue-600">{wordCount}</span>
+          </p>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
