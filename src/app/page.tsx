@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
 
-export default function FancyWordCounter() {
+export default function MainPage() {
   const [text, setText] = useState("");
   const [wordCount, setWordCount] = useState(0);
   const [charCount, setCharCount] = useState(0);
@@ -49,7 +49,7 @@ export default function FancyWordCounter() {
         <div className="relative">
           <textarea
             className="w-full h-64 p-6 border-2 border-white border-opacity-50 rounded-lg outline-none border-white/25 bg-white bg-opacity-10 text-white placeholder-white placeholder-opacity-70 resize-none transition-all duration-300"
-            placeholder="Start typing or paste your text here..."
+            placeholder="Escribe o pega tu texto aquí..."
             value={text}
             onChange={handleTextChange}
           ></textarea>
