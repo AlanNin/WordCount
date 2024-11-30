@@ -38,7 +38,7 @@ export default function MainPage() {
             Word Count
           </h1>
           <p className="text-center text-white">
-            Una sencilla aplicación para contar de palabras 👻
+            Una sencilla aplicación para contar de palabras 👻🪶
           </p>
         </div>
         <div className="relative">
