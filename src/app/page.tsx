@@ -1,19 +1,14 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { countWords } from "~/lib/word_counter";
 
 export default function MainPage() {
   const [text, setText] = useState("");
   const [wordCount, setWordCount] = useState(0);
   const [charCount, setCharCount] = useState(0);
   const [isTyping, setIsTyping] = useState(false);
-
-  const countWords = useCallback((text: string) => {
-    const trimmedText = text.trim();
-    const words = trimmedText === "" ? [] : trimmedText.split(/\s+/);
-    return words.length;
-  }, []);
 
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newText = e.target.value;
